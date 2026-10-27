@@ -1,0 +1,96 @@
+# Paste into scripts.yaml (or create each one in Settings > Automations & scenes >
+# Scripts > Add script > Edit in YAML, without the top-level key).
+
+# Needs the Homebox Labels integration. Pick items from a dropdown (the same
+# list as the Item entity) and an icon from Home Assistant's icon picker.
+print_homebox_item:
+  alias: Print Homebox item tag
+  icon: mdi:label-outline
+  description: Choose one or more Homebox items and an optional icon, and print their tags.
+  fields:
+    items:
+      name: Items
+      description: Items, boxes or rooms to print tags for
+      required: true
+      selector:
+        state:
+          entity_id: select.homebox_item
+          hide_states: ["—"]
+          multiple: true
+    icon:
+      name: Icon
+      description: Optional; overrides the default tag icon
+      selector:
+        icon:
+    layout:
+      name: Layout
+      description: What goes on the tag besides the QR code (empty = the Tag layout setting)
+      selector:
+        select:
+          options:
+            - label: QR + ID + name (+ icon)
+              value: full
+            - label: QR only
+              value: qr
+            - label: QR + icon
+              value: qr_icon
+            - label: QR + name
+              value: qr_name
+            - label: QR + name + icon
+              value: qr_name_icon
+            - label: QR + ID
+              value: qr_id
+    copies:
+      name: Copies
+      default: 1
+      selector:
+        number:
+          min: 1
+          max: 10
+  sequence:
+    - action: homebox_labels.print_tags
+      data:
+        # "000-009 · Junk Box (Office)" -> "000-009"
+        asset_ids: >-
+          {% set picks = items if items is list else [items] %}
+          {{ picks | map('regex_replace', ' · .*$', '') | join(', ') }}
+        icon: "{{ icon | default('') }}"
+        layout: "{{ layout | default('') }}"
+        copies: "{{ copies | default(1) }}"
+
+print_asset_tag:
+  alias: Print Homebox asset tag
+  icon: mdi:label-multiple-outline
+  description: Print Homebox asset tags and show what was printed.
+  fields:
+    asset_ids:
+      name: Asset IDs
+      description: One or more asset IDs, e.g. "000-042, 43"
+      required: true
+      selector:
+        text:
+    icon:
+      name: Icon
+      description: Optional; overrides the default tag icon
+      selector:
+        icon:
+    copies:
+      name: Copies
+      default: 1
+      selector:
+        number:
+          min: 1
+          max: 10
+  sequence:
+    - action: homebox_labels.print_tags
+      data:
+        asset_ids: "{{ asset_ids }}"
+        icon: "{{ icon | default('') }}"
+        copies: "{{ copies | default(1) }}"
+      response_variable: printed
+    - action: persistent_notification.create
+      data:
+        title: Labels printed
+        message: >-
+          {% for i in printed['items'] %}{{ i.asset_id }} {{ i.name }}
+          {% endfor %}

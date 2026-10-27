@@ -1,0 +1,22 @@
+# Dashboard card (Edit dashboard > Add card > Manual). Entity IDs assume the
+# Homebox connection is named "Homebox".
+
+# Homebox tags (needs the Homebox Labels integration).
+type: entities
+title: Homebox tags
+entities:
+  - entity: select.homebox_item
+    name: Item
+  - type: button
+    entity: button.homebox_print_selected_item
+    name: Print tag for the selected item
+    action_name: Print
+  - type: section
+  - entity: text.homebox_asset_ids
+    name: Asset IDs (e.g. 42, 43)
+  - entity: text.homebox_tag_icon
+    name: Icon (optional)
+  - type: button
+    entity: button.homebox_print_tags
+    name: Print tags
+    action_name: Print

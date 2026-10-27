@@ -1,0 +1,103 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Homebox",
+        "data": {
+          "url": "Homebox URL",
+          "api_token": "Homebox API key",
+          "printer": "Label printer"
+        },
+        "data_description": {
+          "url": "The address you open Homebox at, for example https://homebox.example.com",
+          "api_token": "Create one in Homebox under your profile, API keys",
+          "printer": "The label printer that prints the tags"
+        }
+      },
+      "reconfigure": {
+        "title": "Change the Homebox connection",
+        "data": {
+          "url": "Homebox URL",
+          "api_token": "Homebox API key"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach Homebox at that URL.",
+      "invalid_auth": "Homebox rejected the API key."
+    },
+    "abort": {
+      "already_configured": "This Homebox is already connected.",
+      "reconfigure_successful": "The Homebox connection was updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Homebox Labels options",
+        "data": {
+          "printer": "Label printer",
+          "default_icon": "Default tag icon"
+        },
+        "data_description": {
+          "default_icon": "Added to every tag unless an icon is given when printing. Leave empty for none."
+        }
+      }
+    }
+  },
+  "entity": {
+    "button": {
+      "print_selected": {"name": "Print selected item"},
+      "print_tags": {"name": "Print tags"},
+      "refresh_items": {"name": "Refresh item list"}
+    },
+    "select": {
+      "item": {"name": "Item"},
+      "layout": {
+        "name": "Tag layout",
+        "state": {
+          "full": "QR + ID + name",
+          "qr": "QR only",
+          "qr_icon": "QR + icon",
+          "qr_name": "QR + name",
+          "qr_name_icon": "QR + name + icon",
+          "qr_id": "QR + ID"
+        }
+      }
+    },
+    "sensor": {
+      "items": {"name": "Items"}
+    },
+    "text": {
+      "asset_ids": {"name": "Asset IDs"},
+      "icon": {"name": "Tag icon"}
+    }
+  },
+  "selector": {
+    "layout": {
+      "options": {
+        "full": "QR + ID + name (+ icon)",
+        "qr": "QR only",
+        "qr_icon": "QR + icon",
+        "qr_name": "QR + name",
+        "qr_name_icon": "QR + name + icon",
+        "qr_id": "QR + ID"
+      }
+    }
+  },
+  "services": {
+    "print_tags": {
+      "name": "Print Homebox tags",
+      "description": "Looks up Homebox items, boxes or locations and prints an asset tag for each (QR link, asset ID, name) on the configured printer. Returns the matched items.",
+      "fields": {
+        "asset_ids": {"name": "Asset IDs", "description": "Asset IDs to print, such as 000-042 or just 42."},
+        "search": {"name": "Search", "description": "Print every item whose name matches. Leave empty to match everything."},
+        "icon": {"name": "Icon", "description": "MDI icon for these tags; overrides the default tag icon."},
+        "copies": {"name": "Copies", "description": "Copies of each tag."},
+        "dry_run": {"name": "Dry run", "description": "Only return the matching items; don't print."},
+        "layout": {"name": "Layout", "description": "What goes on the tag besides the QR code. Defaults to the Tag layout setting."},
+        "config_entry_id": {"name": "Homebox", "description": "Which Homebox connection, if you have several."}
+      }
+    }
+  }
+}

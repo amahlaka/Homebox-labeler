@@ -1,0 +1,23 @@
+# Example automation. Entity IDs assume the Homebox connection is named
+# "Homebox"; adjust them to yours.
+
+# Homebox: typing asset IDs into Homebox Labels' "Asset IDs" field from the
+# companion app prints them right away, then clears the field.
+- alias: Print Homebox tags as soon as IDs are typed
+  id: homebox_labels_print_on_input
+  mode: queued
+  triggers:
+    - trigger: state
+      entity_id: text.homebox_asset_ids
+  conditions:
+    - condition: template
+      value_template: "{{ trigger.to_state.state | trim not in ['', 'unknown', 'unavailable'] }}"
+  actions:
+    - action: button.press
+      target:
+        entity_id: button.homebox_print_tags
+    - action: text.set_value
+      target:
+        entity_id: text.homebox_asset_ids
+      data:
+        value: ""

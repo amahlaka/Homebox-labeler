@@ -1,0 +1,3 @@
+# The WP9529 package (driver + label renderer), checked out next to this project.
+# Once WP9529 is on a git host, this can become: wp9529 @ git+https://...
+-e ../WP9529

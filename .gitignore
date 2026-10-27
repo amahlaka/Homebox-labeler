@@ -1,0 +1,10 @@
+# Secrets: Homebox URL and API key
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Rendered test labels
+previews/

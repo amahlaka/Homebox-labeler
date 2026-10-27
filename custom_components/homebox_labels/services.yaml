@@ -1,0 +1,34 @@
+print_tags:
+  fields:
+    asset_ids:
+      example: "000-042, 43"
+      selector:
+        text:
+          multiple: true
+    search:
+      example: "drill"
+      selector:
+        text:
+    icon:
+      selector:
+        icon:
+    copies:
+      default: 1
+      selector:
+        number:
+          min: 1
+          max: 50
+          mode: box
+    dry_run:
+      default: false
+      selector:
+        boolean:
+    layout:
+      selector:
+        select:
+          options: ["full", "qr", "qr_icon", "qr_name", "qr_name_icon", "qr_id"]
+          translation_key: layout
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: homebox_labels
