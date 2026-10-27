@@ -171,8 +171,14 @@ needs the WP9529 integration ([HA-WP9529](https://github.com/amahlaka/HA-WP9529)
 
 1. Install the WP9529 integration and add the printer (see
    [HA-WP9529](https://github.com/amahlaka/HA-WP9529)).
-2. Copy `custom_components/homebox_labels` into `/config/custom_components/` on
-   Home Assistant. Restart Home Assistant.
+2. Install Homebox Labels, either:
+   - **with [HACS](https://hacs.xyz)**: HACS → ⋮ → *Custom repositories*, add
+     `https://github.com/amahlaka/Homebox-labeler` as an **Integration**, then
+     find **Homebox Labels** in HACS and *Download* it, or
+   - **by hand**: copy `custom_components/homebox_labels` into
+     `/config/custom_components/` on Home Assistant.
+
+   Restart Home Assistant.
 3. *Add integration* → **Homebox Labels**. Enter the Homebox URL, an API key
    (Homebox: profile → API keys) and pick the printer. The key is checked before
    saving. *Configure* changes the printer or sets a default tag icon;
@@ -283,6 +289,8 @@ For printer problems (alignment, darkness, Bluetooth), see
 | `print_tags.py` | the command-line tool |
 | `homebox.py` | minimal Homebox API client (standard library only) |
 | `custom_components/homebox_labels/` | the Home Assistant integration |
+| `hacs.json` | HACS metadata |
+| `.github/workflows/validate.yaml` | HACS and hassfest checks on GitHub |
 | `examples/homeassistant/` | example scripts, automation and dashboard card |
 | `tests/` | integration tests (Linux/WSL) |
 | `requirements.txt` | installs the WP9529 package from `../WP9529` |

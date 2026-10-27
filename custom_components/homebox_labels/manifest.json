@@ -1,11 +1,13 @@
 {
   "domain": "homebox_labels",
   "name": "Homebox Labels",
-  "codeowners": [],
+  "codeowners": ["@amahlaka"],
   "config_flow": true,
   "dependencies": ["wp9529"],
+  "documentation": "https://github.com/amahlaka/Homebox-labeler",
   "integration_type": "service",
   "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/amahlaka/Homebox-labeler/issues",
   "requirements": [],
   "version": "0.1.0"
 }
