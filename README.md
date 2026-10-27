@@ -17,9 +17,11 @@ Two ways to use it:
   (`custom_components/homebox_labels`), which prints through the WP9529
   printer integration
 
-This builds on the **WP9529** project: its Python package (driver and label
-renderer) for the command line, and its Home Assistant integration for
-printing from Home Assistant.
+This builds on two other projects: the
+[WP9529](https://github.com/amahlaka/WP9529) Python package (driver and label
+renderer) for the command line, and the
+[HA-WP9529](https://github.com/amahlaka/HA-WP9529) integration for printing from
+Home Assistant.
 
 ## Requirements
 
@@ -163,11 +165,12 @@ use the WP9529 package's `wp9529-label` command.
 
 The **Homebox Labels** integration looks items up in Homebox and prints asset
 tags by calling the printer integration's `wp9529.print_label` action, so it
-needs the WP9529 integration (from the WP9529 project) set up first.
+needs the WP9529 integration ([HA-WP9529](https://github.com/amahlaka/HA-WP9529)) set up first.
 
 ### Install
 
-1. Install the WP9529 integration and add the printer (see the WP9529 project).
+1. Install the WP9529 integration and add the printer (see
+   [HA-WP9529](https://github.com/amahlaka/HA-WP9529)).
 2. Copy `custom_components/homebox_labels` into `/config/custom_components/` on
    Home Assistant. Restart Home Assistant.
 3. *Add integration* → **Homebox Labels**. Enter the Homebox URL, an API key
@@ -242,7 +245,7 @@ IDs assume the Homebox connection is named "Homebox":
 The tests cover the config flow, every entity, the action, layouts and icons,
 and the example scripts. Homebox is mocked, and so is the printer: a stand-in
 `wp9529` integration records each `wp9529.print_label` call, so the tests don't
-need the WP9529 project. They need Linux (or WSL) with Python 3.14:
+need the WP9529 projects. They need Linux (or WSL) with Python 3.14:
 
 ```bash
 pip install pytest-homeassistant-custom-component
@@ -269,7 +272,9 @@ empty arguments. Use plain `--search` instead.
 **Homebox Labels: "No printer selected"**: open Homebox Labels → *Configure*
 and pick the printer.
 
-For printer problems (alignment, darkness, Bluetooth), see the WP9529 project.
+For printer problems (alignment, darkness, Bluetooth), see
+[WP9529](https://github.com/amahlaka/WP9529) or, in Home Assistant,
+[HA-WP9529](https://github.com/amahlaka/HA-WP9529).
 
 ## Files
 
