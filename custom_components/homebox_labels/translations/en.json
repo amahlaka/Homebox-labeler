@@ -9,7 +9,7 @@
           "printer": "Label printer"
         },
         "data_description": {
-          "url": "The address you open Homebox at, for example https://homebox.example.com",
+          "url": "The address you open Homebox at, for example {example_url}",
           "api_token": "Create one in Homebox under your profile, API keys",
           "printer": "The label printer that prints the tags"
         }

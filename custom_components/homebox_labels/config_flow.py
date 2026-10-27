@@ -68,7 +68,8 @@ class HomeboxLabelsConfigFlow(ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user",
             data_schema=self.add_suggested_values_to_schema(USER_SCHEMA, user_input or {}),
-            errors=errors)
+            errors=errors,
+            description_placeholders={"example_url": "https://homebox.example.com"})
 
     async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         """Change the Homebox URL or token."""
